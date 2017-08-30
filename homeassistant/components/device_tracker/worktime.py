@@ -68,7 +68,9 @@ def setup_scanner(hass, config, see, discovery_info=None):
         url = 'http://toolbox:8998/WorkTime/json?userName=sokolowski&action=GETATTENDANCE'
         rows = urllib.request.urlopen(url).readlines()
         decoded_rows = [row.decode('ascii').strip().split(',') for row in rows]
-        return  {row[0]: row[3] for row in decoded_rows if len(row[0]) > 0}
+        def good(row):
+            return len(row[0]) > 0 and len(row) >= 4
+        return  {row[0]: row[3] for row in decoded_rows if good(row)}
 
     interval = DEFAULT_SCAN_INTERVAL
     _LOGGER.info("Started worktime tracker with interval=%s", interval)
@@ -76,7 +78,7 @@ def setup_scanner(hass, config, see, discovery_info=None):
     def update(now):
         states = _get_states()
         for host in hosts:
-            host.update(see, states.get(host.login) if host.login in states else 'out of oifice')
+            host.update(see, states.get(host.login) if host.login in states else 'out of office')
         track_point_in_utc_time(hass, update, util.dt.utcnow() + interval)
         return True
 
