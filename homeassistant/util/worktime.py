@@ -3,6 +3,8 @@
 from urllib import request
 from html.parser import HTMLParser
 
+from homeassistant.util import slugify
+
 #_LOGGER = logging.getLogger(__name__)
 
 HOST = 'http://wiki.9livesdata.com'
@@ -45,18 +47,28 @@ class WorktimeParser(HTMLParser):
         if self._in_table and self._level[-1] in ['td', 'th', 'a']:
             self._current_cell += data.strip()
 
-def consultants_matrix():
-    source = request.urlopen('%s/wiki/index.php/Facebook' % HOST).read().decode('utf-8')
+def parse_matrix(url):
+    source = request.urlopen(url).read().decode('utf-8')
     parser = WorktimeParser()
     parser.feed(source)
     return parser.rows
 
 def consultants():
-    matrix = consultants_matrix()
+    matrix = parse_matrix('%s/wiki/index.php/Facebook' % HOST)
     header = matrix[0]
     def decode(row):
         attrs = {k: v for (k,v) in zip(header, row)}
         if '@' in attrs['EMAIL']:
             attrs['id'] = attrs['EMAIL'].split('@')[0]
+        return attrs
+    return {attrs['id']: attrs for attrs in [decode(row) for row in matrix[1:]] if 'id' in attrs}
+
+def consultants_cars():
+    matrix = parse_matrix('%s/wiki/index.php/Carbook' % HOST)
+    header = matrix[0]
+    def decode(row):
+        attrs = {k: v for (k,v) in zip(header, row)}
+        attrs['id'] = slugify("%s_%s_%s" % (attrs['CONSULTANT'], attrs['MODEL'], attrs['PLATE']))
+        attrs['PIC'] = "http://logo.clearbit.com/%s.com" % attrs['MARK']
         return attrs
     return {attrs['id']: attrs for attrs in [decode(row) for row in matrix[1:]] if 'id' in attrs}
