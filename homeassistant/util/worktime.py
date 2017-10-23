@@ -69,6 +69,11 @@ def consultants_cars():
     def decode(row):
         attrs = {k: v for (k,v) in zip(header, row)}
         attrs['id'] = slugify("%s_%s_%s" % (attrs['CONSULTANT'], attrs['MODEL'], attrs['PLATE']))
-        attrs['PIC'] = "http://logo.clearbit.com/%s.com" % attrs['MARK']
+        domain = ".com"
+        if slugify(attrs['MARK']) == 'skoda':
+            domain = "-auto.com"
+        elif slugify(attrs['MARK']) == 'nissan':
+            domain = ".pl"
+        attrs['PIC'] = "http://logo.clearbit.com/%s%s" % (attrs['MARK'], domain)
         return attrs
     return {attrs['id']: attrs for attrs in [decode(row) for row in matrix[1:]] if 'id' in attrs}
