@@ -43,6 +43,10 @@ homeassistant:
 #  latitude: 52.172
 #  longitude: 21.029
 
+recorder:
+  purge_interval: 1
+  purge_keep_days: 60
+
 # Show links to resources in log and frontend
 #introduction:
 
