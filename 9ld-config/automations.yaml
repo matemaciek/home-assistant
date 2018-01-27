@@ -1,0 +1,87 @@
+- action:
+  - alias: Stand-up service
+    data:
+      entity_id: media_player.kdl43w755c
+      language: pl
+      message: Zapraszamy na stan dup.
+    service: tts.google_say
+  alias: Stand up
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - thu
+    - fri
+  id: '1502950760322'
+  trigger:
+  - at: '10:59'
+    platform: time
+- action:
+  - alias: Planning service
+    data:
+      language: pl
+      message: "Zapraszam na planowanie w pomara\u0144czowej!"
+    service: tts.google_say
+  alias: Planowanie
+  condition:
+  - condition: time
+    weekday:
+    - wed
+  id: '1503412490595'
+  trigger:
+  - at: '14:29'
+    platform: time
+- action:
+  - data:
+      entity_id: group.room31b
+    service: light.turn_off
+  alias: "Ostatni gasi \u015Bwiat\u0142o"
+  condition: []
+  id: '1503327470883'
+  trigger:
+  - entity_id: sensor.room_31b_3rd_floor
+    platform: state
+    to: '0'
+- action:
+  - data:
+      entity_id: group.room31b
+    service: light.turn_on
+  alias: "Pierwszy zapala \u015Bwiat\u0142o"
+  condition: []
+  id: '1503327470884'
+  trigger:
+  - entity_id: sensor.room_31b_3rd_floor
+    from: '0'
+    platform: state
+- action:
+  - data:
+      name: Automations
+      object_id: all_automations
+      visible: 'true'
+    service: group.set
+  - data:
+      object_id: all_lights
+      visible: 'true'
+    service: group.set
+  - data:
+      object_id: all_devices
+      visible: 'true'
+    service: group.set
+  - data:
+      entity_id: switch.flux
+    service: switch.turn_on
+  alias: Enable Groups
+  condition: []
+  id: '1503399144296'
+  trigger:
+  - event: start
+    platform: homeassistant
+- action:
+  - service: homeassistant.restart
+  alias: Regular restart
+  condition: []
+  id: '1503412400595'
+  trigger:
+  - at: 05:29
+    platform: time

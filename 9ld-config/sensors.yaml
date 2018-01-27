@@ -1,0 +1,227 @@
+- platform: airvisual
+  api_key: DEvDLpDxPtyNzczma
+  monitored_conditions:
+    - us
+    - cn
+  city: warsaw
+  state: mazowieckie
+  country: poland
+- platform: waqi
+  token: 1a59465976af944c1b26d65d5746e777f50d78ff
+  locations:
+    - warszawa
+- platform: yr
+- platform: template
+  sensors:
+    in:
+      value_template: '{{states.device_tracker|map(attribute="attributes")|selectattr("human")|sum("in")}}'
+      friendly_name: in the building
+      unit_of_measurement: human
+    working:
+      value_template: '{{states.device_tracker|map(attribute="attributes")|selectattr("human")|sum("work")}}'
+      friendly_name: at work
+      unit_of_measurement: human
+    break:
+      value_template: '{{states.device_tracker|map(attribute="attributes")|selectattr("human")|sum("break")}}'
+      friendly_name: on break
+      unit_of_measurement: human
+    total:
+      value_template: '{{states.device_tracker|map(attribute="attributes")|selectattr("human")|sum("human")}}'
+      friendly_name: in 9LivesData
+      unit_of_measurement: human
+    working_p:
+      value_template: '{{(states.sensor.working.state | float *100 / (states.sensor.total.state | float)) | round }}'
+      friendly_name: Attendace
+      unit_of_measurement: '%'
+    cars_max_p:
+      value_template: '{{(states.sensor.cars_max.state | float *100 / (states.sensor.in.state | float)) | round }}'
+      friendly_name: Motorization
+      unit_of_measurement: '%'
+    cars:
+      value_template: '{{states.group.cars.state|round(2)}}'
+      friendly_name: at parking estimation
+      unit_of_measurement: car
+#    cars_max:
+#      value_template: '{% for c in states.device_tracker|map(attribute="attributes")|selectattr("human")|selectattr("in")|map(attribute="P_CAR")|map("float")|select("greaterthan", 0) %}{% if loop.last %}{{ loop.index }}{% endif %}{% endfor %}'
+#      friendly_name: at parking high estimation
+#      unit_of_measurement: car
+- platform: google_travel_time
+  name: to Bemowo
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: 9LivesData
+  destination: Bemowo, Warsaw
+- platform: google_travel_time
+  name: from Bemowo
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: Bemowo, Warsaw
+  destination: 9LivesData
+- platform: google_travel_time
+  name: to Białołęka
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: 9LivesData
+  destination: Białołęka, Warsaw
+- platform: google_travel_time
+  name: from Białołęka
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: Białołęka, Warsaw
+  destination: 9LivesData
+- platform: google_travel_time
+  name: to Bielany
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: 9LivesData
+  destination: Bielany, Warsaw
+- platform: google_travel_time
+  name: from Bielany
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: Bielany, Warsaw
+  destination: 9LivesData
+- platform: google_travel_time
+  name: to Mokotów
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: 9LivesData
+  destination: Mokotów, Warsaw
+- platform: google_travel_time
+  name: from Mokotów
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: Mokotów, Warsaw
+  destination: 9LivesData
+- platform: google_travel_time
+  name: to Ochota
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: 9LivesData
+  destination: Ochota, Warsaw
+- platform: google_travel_time
+  name: from Ochota
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: Ochota, Warsaw
+  destination: 9LivesData
+- platform: google_travel_time
+  name: to Praga-Południe
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: 9LivesData
+  destination: Praga-Południe, Warsaw
+- platform: google_travel_time
+  name: from Praga-Południe
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: Praga-Południe, Warsaw
+  destination: 9LivesData
+- platform: google_travel_time
+  name: to Praga-Północ
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: 9LivesData
+  destination: Praga-Północ, Warsaw
+- platform: google_travel_time
+  name: from Praga-Północ
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: Praga-Północ, Warsaw
+  destination: 9LivesData
+- platform: google_travel_time
+  name: to Rembertów
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: 9LivesData
+  destination: Rembertów, Warsaw
+- platform: google_travel_time
+  name: from Rembertów
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: Rembertów, Warsaw
+  destination: 9LivesData
+- platform: google_travel_time
+  name: to Śródmieście
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: 9LivesData
+  destination: Śródmieście, Warsaw
+- platform: google_travel_time
+  name: from Śródmieście
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: Śródmieście, Warsaw
+  destination: 9LivesData
+- platform: google_travel_time
+  name: to Targówek
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: 9LivesData
+  destination: Targówek, Warsaw
+- platform: google_travel_time
+  name: from Targówek
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: Targówek, Warsaw
+  destination: 9LivesData
+- platform: google_travel_time
+  name: to Ursus
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: 9LivesData
+  destination: Ursus, Warsaw
+- platform: google_travel_time
+  name: from Ursus
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: Ursus, Warsaw
+  destination: 9LivesData
+- platform: google_travel_time
+  name: to Ursynów
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: 9LivesData
+  destination: Ursynów, Warsaw
+- platform: google_travel_time
+  name: from Ursynów
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: Ursynów, Warsaw
+  destination: 9LivesData
+- platform: google_travel_time
+  name: to Wawer
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: 9LivesData
+  destination: Wawer, Warsaw
+- platform: google_travel_time
+  name: from Wawer
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: Wawer, Warsaw
+  destination: 9LivesData
+- platform: google_travel_time
+  name: to Wesoła
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: 9LivesData
+  destination: Wesoła, Warsaw
+- platform: google_travel_time
+  name: from Wesoła
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: Wesoła, Warsaw
+  destination: 9LivesData
+- platform: google_travel_time
+  name: to Wilanów
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: 9LivesData
+  destination: Wilanów, Warsaw
+- platform: google_travel_time
+  name: from Wilanów
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: Wilanów, Warsaw
+  destination: 9LivesData
+- platform: google_travel_time
+  name: to Włochy
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: 9LivesData
+  destination: Włochy, Warsaw
+- platform: google_travel_time
+  name: from Włochy
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: Włochy, Warsaw
+  destination: 9LivesData
+- platform: google_travel_time
+  name: to Wola
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: 9LivesData
+  destination: Wola, Warsaw
+- platform: google_travel_time
+  name: from Wola
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: Wola, Warsaw
+  destination: 9LivesData
+- platform: google_travel_time
+  name: to Żoliborz
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: 9LivesData
+  destination: Żoliborz, Warsaw
+- platform: google_travel_time
+  name: from Żoliborz
+  api_key: AIzaSyA4BGqh1oqNZtSWaWY4SN9qbvqZMGImCAE
+  origin: Żoliborz, Warsaw
+  destination: 9LivesData

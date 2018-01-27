@@ -1,0 +1,99 @@
+room31b:
+  name: Room 3.1b
+  entities:
+    - light.31b0
+    - light.31b1
+    - light.31b2
+
+waqi:
+  name: Air quality
+  entities:
+    - sensor.chinese_air_pollution_level
+    - sensor.us_air_pollution_level
+    - sensor.chinese_air_quality_index
+    - sensor.us_air_quality_index
+    - sensor.chinese_main_pollutant
+    - sensor.us_main_pollutant
+    - sensor.waqi_komunikacyjna_warszawa_mazowieckie_poland
+    - sensor.waqi_krucza_warszawa_mazowieckie_poland
+    - sensor.waqi_marszakowska_warszawa_mazowieckie_poland
+    - sensor.waqi_porajow_warszawa_mazowieckie_poland
+    - sensor.waqi_puszczy_solskiej_warszawa_mazowieckie_poland
+    - sensor.waqi_targowek_warszawa_mazowieckie_poland
+    - sensor.waqi_ursynow_warszawa_mazowieckie_poland
+
+world:
+  name: Weather
+  entities: sun.sun, sensor.yr_symbol
+
+lights:
+  view: yes
+  icon: mdi:lightbulb
+  entities:
+    - group.room31b
+    - switch.flux
+
+traffic_from:
+  name: Traffic from 9LD
+  icon: mdi:car
+  entities:
+    - sensor.to_bemowo
+    - sensor.to_biaoeka
+    - sensor.to_bielany
+    - sensor.to_mokotow
+    - sensor.to_ochota
+    - sensor.to_pragapoudnie
+    - sensor.to_pragaponoc
+    - sensor.to_rembertow
+    - sensor.to_srodmiescie
+    - sensor.to_targowek
+    - sensor.to_ursus
+    - sensor.to_ursynow
+    - sensor.to_wawer
+    - sensor.to_wesoa
+    - sensor.to_wilanow
+    - sensor.to_wochy
+    - sensor.to_wola
+    - sensor.to_zoliborz
+
+traffic_to:
+  name: Traffic to 9LD
+  icon: mdi:car
+  entities:
+    - sensor.from_bemowo
+    - sensor.from_biaoeka
+    - sensor.from_bielany
+    - sensor.from_mokotow
+    - sensor.from_ochota
+    - sensor.from_pragapoudnie
+    - sensor.from_pragaponoc
+    - sensor.from_rembertow
+    - sensor.from_srodmiescie
+    - sensor.from_targowek
+    - sensor.from_ursus
+    - sensor.from_ursynow
+    - sensor.from_wawer
+    - sensor.from_wesoa
+    - sensor.from_wilanow
+    - sensor.from_wochy
+    - sensor.from_wola
+    - sensor.from_zoliborz
+
+traffic:
+  name: Traffic
+  icon: mdi:car
+  view: yes
+  entities:
+    - camera.parking_cam
+    - group.cars
+    - group.cars2
+    - group.traffic_from
+    - group.traffic_to
+    - sensor.cars
+    - sensor.cars_max_p
+    - sensor.cars_max
+
+default_view:
+  view: yes
+  icon: mdi:home
+  entities: group.waqi, group.room31b, group.world, media_player.kdl43w755c, media_player.sony_bravia_tv, group.all_automations, sensor.in, sensor.working, sensor.break, sensor.working_p, sensor.total, switch.flux

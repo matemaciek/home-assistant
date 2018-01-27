@@ -1,0 +1,115 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: 9LivesData
+  # Location required to calculate the time the sun rises and sets
+  latitude: 52.175728
+  longitude: 21.03326
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 100
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Warsaw
+
+#android_ip_webcam:
+#  - host: 84.10.2.38
+#    port: 8090
+#    name: Parking cam
+#    sensors:
+#      - battery_level
+#      - battery_temp
+#      - battery_voltage
+#      - light
+#      - motion
+#      - pressure
+
+#zone 2:
+#  name: EXEMPTIMEOFF
+#  latitude: 52.180
+#  longitude: 21.029
+#  radius: 200
+
+#zone 3:
+#  name: on break
+#  latitude: 52.172
+#  longitude: 21.037
+#  radius: 200
+
+#zone 4:
+#  name: home
+#  radius: 200
+#  latitude: 52.175728
+#  longitude: 21.03326
+#  latitude: 52.172
+#  longitude: 21.029
+
+# Show links to resources in log and frontend
+#introduction:
+
+media_player:
+  - platform: braviatv
+    host: 192.168.6.221
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+http:
+  server_port: 80
+  # Uncomment this to add a password (recommended!)
+  # api_password: PASSWORD
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  #base_url: https://mailhub.9livesdata.com/workbook/
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Track the sun
+sun:
+
+# Weather prediction
+sensor: !include sensors.yaml
+
+# Text to speech
+tts:
+  - platform: google
+
+device_tracker:
+  - platform: worktime
+
+
+#tradfri:
+#  host: 192.168.6.209
+#  api_key: q6IqQZ5aBDVuh6Ee
+
+switch:
+  platform: flux
+  lights: group.room31b
+  mode: mired
+  sunset_colortemp: 2700
+  stop_colortemp: 2200
+  disable_brightness_adjust: True
+#  name: Flux 3.1b
+
+group: !include groups.yaml
+automation: !include automations.yaml
