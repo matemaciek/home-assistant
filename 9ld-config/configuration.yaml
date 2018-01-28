@@ -61,7 +61,7 @@ frontend:
 config:
 
 http:
-  server_port: 80
+  server_port: 8080
   # Uncomment this to add a password (recommended!)
   # api_password: PASSWORD
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
@@ -102,8 +102,8 @@ device_tracker:
   - platform: worktime
 
 
-#tradfri:
-#  host: 192.168.6.209
+tradfri:
+  host: 192.168.6.209
 #  api_key: q6IqQZ5aBDVuh6Ee
 
 switch:
