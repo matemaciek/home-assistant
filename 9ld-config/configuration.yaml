@@ -53,6 +53,8 @@ recorder:
 media_player:
   - platform: braviatv
     host: 192.168.6.221
+  - platform: cast
+    host: 192.168.6.221
 
 # Enables the frontend
 frontend:
