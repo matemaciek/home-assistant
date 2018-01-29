@@ -52,9 +52,9 @@ recorder:
 
 media_player:
   - platform: braviatv
-    host: 192.168.6.221
+    host: bravia.9livesdata.com
   - platform: cast
-    host: 192.168.6.221
+    host: bravia.9livesdata.com
 
 # Enables the frontend
 frontend:
@@ -105,7 +105,7 @@ device_tracker:
 
 
 tradfri:
-  host: 192.168.6.209
+  host: tradfri.9livesdata.com
 #  api_key: q6IqQZ5aBDVuh6Ee
 
 switch:
